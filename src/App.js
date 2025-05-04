@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import ContactForm from './components/ContactForm'
+import { useState,useEffect } from 'react';
+
+
 
 function App() {
+  const[Contact,setContact]=useState([]);
+  const addContacts = (contact) =>{
+    setContact([...Contact, contact]);
+  }
+  useEffect(() => {
+    console.log(Contact);
+    if (Contact.length > 0) {
+      console.log(`✅ New person added: ${Contact[Contact.length - 1].name}`);
+      
+    }
+  }, [Contact]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ContactForm addContacts={addContacts} />
     </div>
   );
 }
